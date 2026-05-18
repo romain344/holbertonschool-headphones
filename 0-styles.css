@@ -10,139 +10,192 @@
 
 :root {
   --primary-color: #ff6565;
+  --background-color: #08101b;
+  --surface-color: rgba(255, 255, 255, 0.08);
   --text-color: #ffffff;
+  --muted-color: rgba(255, 255, 255, 0.72);
   --max-width: 1000px;
+  --gap: 1.75rem;
 }
 
 /* GLOBAL */
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 a {
   text-decoration: none;
-  color: var(--text-color);
+  color: inherit;
 }
 
-ul {
-  list-style: none;
+button,
+a {
+  cursor: pointer;
 }
 
 .container {
-  width: 90%;
-  max-width: var(--max-width);
+  width: min(90%, var(--max-width));
   margin: 0 auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 /* HERO */
 
 .hero {
-  background-image: url("images/headphones_hero_1.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-
+  position: relative;
   min-height: 100vh;
-  color: var(--text-color);
+  background: radial-gradient(circle at top left, rgba(255, 101, 101, 0.18), transparent 32%),
+    linear-gradient(180deg, #0b1522 0%, #08101b 100%);
+  padding-bottom: 3rem;
 }
 
-/* HEADER */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
 
-.header {
+.hero-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding-top: 30px;
+  padding: 2rem 0 1rem;
 }
 
 .logo img {
   width: 160px;
 }
 
-.navbar ul {
+.nav {
   display: flex;
-  gap: 40px;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
-.navbar a {
-  font-size: 12px;
-  font-weight: bold;
+.nav a {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 0.2s ease;
 }
 
-.navbar a:hover,
-.navbar a:active {
+.nav a:hover,
+.nav a:focus {
   color: var(--primary-color);
 }
 
-/* HERO CONTENT */
-
-.hero-content {
-  display: flex;
-  flex-direction: column;
+.hero-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  min-height: calc(100vh - 90px);
-
-  max-width: 650px;
-  margin: 0 auto;
+  gap: 3rem;
+  min-height: calc(100vh - 110px);
+  padding-bottom: 2rem;
 }
 
-.hero-content h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+.hero-copy {
+  max-width: 520px;
 }
 
-.subtitle {
-  font-size: 16px;
-  margin-bottom: 40px;
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--muted-color);
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-.btn {
+.hero-copy h1 {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  line-height: 1.02;
+  margin-bottom: 1.5rem;
+}
+
+.hero-text,
+.hero-description {
+  color: var(--muted-color);
+  line-height: 1.75;
+}
+
+.hero-text {
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+.button {
+  display: inline-block;
   background-color: var(--primary-color);
-  padding: 15px 30px;
-  border-radius: 30px;
-
-  font-size: 14px;
-  font-weight: bold;
-
-  margin-bottom: 60px;
-
+  color: var(--text-color);
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   transition: opacity 0.3s ease;
 }
 
-.btn:hover,
-.btn:active {
-  opacity: 0.9;
+.button:hover,
+.button:focus {
+  opacity: 0.92;
 }
 
-.description {
-  font-size: 16px;
-  line-height: 1.6;
+.hero-description {
+  margin-top: 2rem;
+}
+
+.hero-image {
+  display: grid;
+  place-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 24px;
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.35);
 }
 
 /* MOBILE */
 
 @media screen and (max-width: 480px) {
-
-  .header {
+  .hero-header {
     flex-direction: column;
-    gap: 30px;
+    align-items: flex-start;
+    gap: 1.5rem;
   }
 
-  .navbar ul {
-    gap: 20px;
+  .nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
-  .hero-content h1 {
-    font-size: 26px;
+  .hero-row {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 2rem;
+    padding-bottom: 1.5rem;
   }
 
-  .description {
-    font-size: 14px;
+  .hero-copy h1 {
+    font-size: 2.2rem;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-image img {
+    max-width: 100%;
   }
 }
